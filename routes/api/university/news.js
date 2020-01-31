@@ -84,7 +84,7 @@ router.get('/page/:pageNumber', async function (req, res) {
 });
 
 router.get('/open', async function(req, res){
-    rp('https://uny.ac.id/'+req.params.link, (err, resp, body) => {
+    rp('https://uny.ac.id'+req.params.link, (err, resp, body) => {
         try{
             const $ = cheerio.load(body);
 
