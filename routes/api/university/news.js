@@ -63,11 +63,12 @@ router.get('/page/:pageNumber', async function (req, res) {
                 const summary = $(element).find('td .views-field-body .field-content p').text();
                 const link = $(element).find('td .views-field-title .field-content a').attr('href');
                 const content = null;
-                const image = $(element).find('td .views-field-field-image .field-content img').attr('src');
+                const thumbnail = $(element).find('td .views-field-field-image .field-content img').attr('src');
+                const featured_image = null;
                 const created_date = $(element).find('td .views-field-created .field-content').text().split(': ')[1].split('\n')[0];
         
                 results.push({
-                    title, summary, link, content, image, created_date
+                    title, summary, link, content, image, created_date, featured_image
                 });
             });
         
@@ -89,14 +90,15 @@ router.get('/open', async function(req, res){
 
             const title = $('h1.title a').text();
             const summary = null;
+            const thumbnail = null;
             const link = $('h1.title a').attr('href');
             const content = $('.content.node-article .field-item.even').text();
-            const image = $('.field-name-field-image img').attr('src');
+            const featured_image = $('.field-name-field-image img').attr('src');
             const submitted_date = $('#date-submitted');
             const created_date = $(submitted_date).find('.day').text() + $(submitted_date).find('.month').text() + $(submitted_date).find('.year').text();
 
             const result = {
-                title, summary, link, content, image, created_date
+                title, summary, link, content, featured_image, created_date, thumbnail
             };
 
             res.json({status: 200, result});
