@@ -57,9 +57,7 @@ router.get('/page/:pageNumber', async function (req, res) {
     rp('https://uny.ac.id/index-berita?page='+req.params.pageNumber, (err, resp, content) => {
         try{
             const $ = cheerio.load(content);
-            const result = {
-                results: []
-            };
+            const results = [];
             $('.view-berita .view-content table tr').each((index, element) => {
                 const title = $(element).find('td .views-field-title .field-content a').text();
                 const summary = $(element).find('td .views-field-body .field-content p').text();
@@ -68,12 +66,12 @@ router.get('/page/:pageNumber', async function (req, res) {
                 const image = $(element).find('td .views-field-image .field-content img').attr('src');
                 const created_date = $(element).find('td .views-field-created .field-content').text().split(': ')[1].split('\n')[0];
         
-                result.results.push({
+                results.push({
                     title, summary, link, content, image, created_date
                 });
             });
         
-            res.json({status: 200, result})
+            res.json({status: 200, results})
         }catch(err){
             console.log(err.message);
             res.status(500).json({
