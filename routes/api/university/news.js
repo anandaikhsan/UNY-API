@@ -68,7 +68,7 @@ router.get('/page/:pageNumber', async function (req, res) {
                 const created_date = $(element).find('td .views-field-created .field-content').text().split(': ')[1].split('\n')[0];
         
                 results.push({
-                    title, summary, link, content, image, created_date, featured_image
+                    title, summary, link, content, thumbnail, created_date, featured_image
                 });
             });
         
