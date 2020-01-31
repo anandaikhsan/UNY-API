@@ -63,7 +63,7 @@ router.get('/page/:pageNumber', async function (req, res) {
                 const summary = $(element).find('td .views-field-body .field-content p').text();
                 const link = $(element).find('td .views-field-title .field-content a').attr('href');
                 const content = null;
-                const image = $(element).find('td .views-field-image .field-content img').attr('src');
+                const image = $(element).find('td .views-field-field-image .field-content img').attr('src');
                 const created_date = $(element).find('td .views-field-created .field-content').text().split(': ')[1].split('\n')[0];
         
                 results.push({
