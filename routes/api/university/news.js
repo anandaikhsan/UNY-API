@@ -60,7 +60,7 @@ router.get('/page/:pageNumber', async function (req, res) {
 
             const lastIndex = parseInt($('.pager-last.last a').attr('href').split('?')[1].split('page=')[1]);
             const totalPage = 1 + lastIndex;
-            const beritaPerPage = $('.view-berita .view-content table tr').length;
+            const beritaPerPage = $('.view-berita .view-content table tr .views-field-title').length;
 
             const results = [];
             $('.view-berita .view-content table tr').each((index, element) => {
@@ -131,7 +131,7 @@ router.get('/search', async function (req, res) {
 
             const lastIndex = parseInt($('.pager-last.last a').attr('href').split('?')[1].split('page=')[1]);
             const totalPage = 1 + lastIndex;
-            const beritaPerPage = $('.view-berita .view-content table tr').length;
+            const beritaPerPage = $('.view-berita .view-content table tr .views-field-title').length;
 
             const results = [];
             $('.view-berita .view-content table tr').each((index, element) => {
