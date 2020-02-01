@@ -95,7 +95,7 @@ router.get('/open', async function(req, res){
             const content = $('.content.node-article .field-item.even').text();
             const featured_image = $('.field-name-field-image img').attr('src');
             const submitted_date = $('#date-submitted');
-            const created_date = $(submitted_date).find('.day').text() + $(submitted_date).find('.month').text() + $(submitted_date).find('.year').text();
+            const created_date = $(submitted_date).find('.day').text() + " " + $(submitted_date).find('.month').text() + " " +  $(submitted_date).find('.year').text();
 
             const result = {
                 title, summary, link, content, featured_image, created_date, thumbnail
