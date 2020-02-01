@@ -113,5 +113,41 @@ router.get('/open', async function(req, res){
     });
 })
 
+router.get('/search', async function (req, res) {
+    rp('https://uny.ac.id/index-berita?title='+req.query.title+'&page='+req.query.page, (err, resp, content) => {
+        try{
+            const $ = cheerio.load(content);
+            const lastIndex = parseInt($('.pager-last.last a').attr('href').split('?')[1].split('page=')[1]);
+            const totalPage = 1 + lastIndex;
+            const results = [];
+            $('.view-berita .view-content table tr').each((index, element) => {
+                const title = $(element).find('td .views-field-title .field-content a').text();
+                const summary = $(element).find('td .views-field-body .field-content p').text();
+                const link = $(element).find('td .views-field-title .field-content a').attr('href');
+                const content = null;
+                const thumbnail = $(element).find('td .views-field-field-image .field-content img').attr('src');
+                const featured_image = null;
+                const created_date = $(element).find('td .views-field-created .field-content').text().split(': ')[1].split('\n')[0];
+        
+                results.push({
+                    title, summary, link, content, thumbnail, created_date, featured_image
+                });
+            });
+        
+            res.json({
+                status: 200,
+                results,
+                total_page: totalPage,
+                first_index: 0
+            })
+        }catch(err){
+            console.log(err.message);
+            res.status(500).json({
+                status: 500,
+                error: err.message
+            })
+        }
+    });
+});
 
 module.exports = router;
